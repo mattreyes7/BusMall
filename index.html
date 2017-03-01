@@ -1,17 +1,41 @@
 <!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <title>Bus Mall</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>Bus Mall</header>
-  <div id="image-container">
-      <div id="imageOne"></div>
-      <div id="imageTwo"></div>
-      <div id="imageThree"></div>
-  </div>
-  <script src="app.js"></script>
+  <header>
+    <section class="logo-info">
+      <img class= "logo" src="assets/bus-mall-logo.png" alt="Bus Mall logo">
+      <h2 class ="sub-title">Next stop, more useless things!</h2>
+    </section>
+    <nav class="nav-icons">
+      <ul class="nav-list">
+        <li>Home</li>
+        <li>Products</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="main-content">
+      <section class="images" id="image-container">
+        <img class="image-one-box" id="imageOne">
+        <img class="image-two-box" id="imageTwo">
+        <img class="image-three-box" id="imageThree">
+      </section>
+      <section class="button-box">
+        <button type="button" id="show-results">show results</button>
+      </section>
+      <aside class="results-box" id="results"></aside>
+    </section>
+  </main>
+  <footer>
+
+  </footer>
+  <script src="app.js" charset="utf-8"></script>
 </body>
-<!-- <footer>Matt Reyes 2017 </footer> -->
 </html>
