@@ -1,36 +1,93 @@
-header {
-  font-family: 'Verdana';
-  font-size: 80px;
-  font-weight: 600;
-  text-align: center;
+@font-face {
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Caveat Brush', cursive;
+  src: <link href="https://fonts.googleapis.com/css?family=Oswald|Caveat+Brush" rel="stylesheet">
 }
 
-#image-container {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+img {
+  max-width: 200px;
+}
+
+.logo-info{
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
- #imageOne {
-    height: 250px;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 200px;
+.logo {
+  width: 300px;
+  height: 250px;
 }
 
- #imageTwo {
-    height: 250px;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 200px;
+.sub-title {
+  margin-left: 40px;
+  font-family: 'Caveat Brush', cursive;
+  width: 300px;
 }
 
- #imageThree {
-    height: 250px;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 200px;
+.nav-icons {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.nav-list {
+  font-family: 'Oswald', sans-serif;
+  display: inline-flex;
+  list-style: none;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.image-one-box {
+  width: 300px;
+}
+
+.image-two-box {
+  width: 300px;
+}
+
+.image-three-box {
+  width: 300px;
+}
+
+ .results-box {
+  font-family: 'Oswald', sans-serif;
+  display: inline-block;
+  margin-left: 150px;
+}
+
+.button-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  /*margin-top: 5px;
+  margin-bottom: 5px;*/
+
+}
+
+li {
+  align-self: center;
+  display: inline-block;
+  padding-left: 60px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 40%;
+  list-style: square;
 }
