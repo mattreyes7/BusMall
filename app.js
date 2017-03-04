@@ -1,18 +1,18 @@
 
-var productImageNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var productsArray = [];
 
-function Products(name) {
+function Product(name) {
   this.name = name;
   this.path = './assets/' + name + '.jpg';
   this.votes = 0;
   productsArray.push(this)
 
 }
-// builds products with iffe
+// builds products with IFFE
 (function() {
-  for(var i = 0; i < productImageNames.length; i++) {
-    new Products(productImageNames[i]);
+  for(var i = 0; i < productNames.length; i++) {
+    new Product(productNames[i]);
   }
 })();
 
@@ -26,22 +26,33 @@ var tracker = {
   imageObjOne: null,
   imageObjTwo: null,
   imageObjThree: null,
-  clicks: 1,
+  clicks: 0,
 
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * productsArray.length);
   },
 
-  // function that displays 3 random non repeating images
-  displayImages: function() {
+// chooses random index from product array
+
+  chooseThreeRandomIndices: function() {
     this.imageObjOne = productsArray[this.getRandomIndex()];
     this.imageObjTwo = productsArray[this.getRandomIndex()];
     this.imageObjThree = productsArray[this.getRandomIndex()];
-
-    if(this.imageObjOne === this.imageObjTwo || this.imageObjOne === this.imageObjThree || this.imageObjTwo === this.imageObjThree){
+    if(this.imageObjOne === this.imageObjTwo ||
+       this.imageObjOne === this.imageObjThree ||
+       this.imageObjTwo === this.imageObjThree
+     ) {
       this.displayImages();
     }
+
+  },
+
+  // use random indices in function that displays 3 random non repeating images
+
+  displayImages: function() {
+    tracker.chooseThreeRandomIndices();
+
     this.imageOneEl.src = this.imageObjOne.path;
     this.imageOneEl.id = this.imageObjOne.name;
 
@@ -53,10 +64,10 @@ var tracker = {
 
   },
 
-  checkClicks: function() {
+  limitClicks: function() {
     console.log(this.clicks);
-    if(this.clicks > 14) {
-      this.imageContainerEl.removeEventListener('click', this.clickHandler);
+    if(this.clicks >= 15) {
+      this.imageContainerEl.removeEventListener('click', this.clicker);
       this.showResultsEl.addEventListener('click', function(e) {
         e.preventDefault();
         tracker.renderResults();
@@ -65,8 +76,8 @@ var tracker = {
 
   },
 
-  clickHandler: function(e) {
-    tracker.checkClicks();
+  clicker: function(e) {
+    tracker.limitClicks();
     if (
       e.target.id === tracker.imageObjOne.name ||
       e.target.id ===  tracker.imageObjTwo.name ||
@@ -80,7 +91,7 @@ var tracker = {
   },
 
   tallyVotes: function(elId) {
-    for(var i in productsArray) {
+    for(var i = 0; i < productNames.length; i++) {
       if(elId === productsArray[i].name) {
         productsArray[i].votes +=1;
         console.log(productsArray[i]);
@@ -96,7 +107,7 @@ var tracker = {
     // append the Ul to the document
     var ulEl = document.createElement('ul');
 
-    for(var i in productsArray) {
+    for(var i = 0; i < productsArray.length; i++) {
       var liEl = document.createElement('li');
       liEl.textContent = productsArray[i].name + ': ' + productsArray[i].votes;
       ulEl.appendChild(liEl);
@@ -106,5 +117,5 @@ var tracker = {
   }
 };
 
-tracker.imageContainerEl.addEventListener('click', tracker.clickHandler);
+tracker.imageContainerEl.addEventListener('click', tracker.clicker);
 tracker.displayImages();
