@@ -1,11 +1,17 @@
 @font-face {
   font-family: 'Oswald', sans-serif;
   font-family: 'Caveat Brush', cursive;
-  src: <link href="https://fonts.googleapis.com/css?family=Oswald|Caveat+Brush" rel="stylesheet">
 }
 
+html {
+  display: flex;
+  justify-content: center;
+  background-image: url(assets/road_wallpaper_da058060f.jpg);
+  background-position: center;
+  background-size: cover;
+}
 img {
-  max-width: 200px;
+  max-width: 400px;
 }
 
 .logo-info{
@@ -27,48 +33,53 @@ img {
   margin-left: 40px;
   font-family: 'Caveat Brush', cursive;
   width: 300px;
-}
-
-.nav-icons {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
-}
-
-.nav-list {
-  font-family: 'Oswald', sans-serif;
-  display: inline-flex;
-  list-style: none;
+  color: black;
 }
 
 .images {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .image-one-box {
   width: 300px;
+  padding: 5px;
 }
 
 .image-two-box {
   width: 300px;
+  padding: 5px;
 }
 
 .image-three-box {
   width: 300px;
+  padding: 5px;
 }
 
  .results-box {
   font-family: 'Oswald', sans-serif;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 20px;
   margin-left: 150px;
+  margin-right: 150px;
+  border: solid black;
+  width: 70%;
+
 }
+
+#results {
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
 
 .button-box {
   display: flex;
@@ -77,17 +88,20 @@ img {
   justify-content: center;
   align-content: center;
   align-items: center;
-  /*margin-top: 5px;
-  margin-bottom: 5px;*/
 
+}
+
+ul {
+  padding-left: 25%;
 }
 
 li {
   align-self: center;
   display: inline-block;
-  padding-left: 60px;
+  padding-left: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
   width: 40%;
   list-style: square;
+  color: white;
 }
