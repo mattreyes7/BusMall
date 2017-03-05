@@ -11,28 +11,12 @@ function Product(name,path,votes) {
 
 }
 
-function createLs() {
-  localStorage.setItem('productArray', JSON.stringify(productArray));
-  console.log('createLs');
-}
-
-
-  function retrieveLs(){
-  var parsedData = JSON.parse(localStorage.getItem('productArray'));
-  console.log('retrieveLs');
-  for (var i = 0; i < parsedData.length; i++) {
-    var currentProduct = parsedData[i];
-    new Product(Product.name, Product.path, Product.votes);
-  }
-}
-
 // builds products with IFFE
 (function() {
   for(var i = 0; i < productNames.length; i++) {
     new Product(productNames[i]);
   }
 })();
-
 
 var tracker = {
   imageOneEl: document.getElementById('imageOne'),
