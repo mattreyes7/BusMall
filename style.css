@@ -6,9 +6,10 @@
 html {
   display: flex;
   justify-content: center;
-  background-image: url(assets/road_wallpaper_da058060f.jpg);
+  background-color: grey;
+  /*background-image: url(assets/road_wallpaper_da058060f.jpg);
   background-position: center;
-  background-size: cover;
+  background-size: cover;*/
 }
 img {
   max-width: 400px;
