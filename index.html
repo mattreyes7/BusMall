@@ -5,6 +5,7 @@
   <title>Bus Mall</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Oswald|Caveat+Brush" rel="stylesheet">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js'></script>
 </head>
 <body>
   <header>
@@ -22,8 +23,11 @@
       </section>
       <section class="button-box">
         <button type="button" id="show-results">click for results</button>
+        <!-- <button id="render-chart">Render Chart</button> -->
+
       </section>
       <aside class="results-box" id="results"></aside>
+      <canvas class="chart-container" id="chart" width="350" height="350"></canvas>
     </section>
   </main>
   <footer>

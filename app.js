@@ -1,14 +1,16 @@
 
 var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var productsArray = [];
+var productArray = [];
+var ctx = document.getElementById('chart').getContext('2d');
 
-function Product(name) {
+function Product(name,path,votes) {
   this.name = name;
   this.path = './assets/' + name + '.jpg';
   this.votes = 0;
-  productsArray.push(this)
+  productArray.push(this)
 
 }
+
 // builds products with IFFE
 (function() {
   for(var i = 0; i < productNames.length; i++) {
@@ -21,6 +23,7 @@ var tracker = {
   imageTwoEl: document.getElementById('imageTwo'),
   imageThreeEl: document.getElementById('imageThree'),
   showResultsEl:document.getElementById('show-results'),
+  renderChartEl:document.getElementById('render-chart'),
   resultsEl: document.getElementById('results'),
   imageContainerEl: document.getElementById('image-container'),
   imageObjOne: null,
@@ -30,15 +33,15 @@ var tracker = {
 
 
   getRandomIndex: function() {
-    return Math.floor(Math.random() * productsArray.length);
+    return Math.floor(Math.random() * productArray.length);
   },
 
 // chooses random index from product array
 
   chooseThreeRandomIndices: function() {
-    this.imageObjOne = productsArray[this.getRandomIndex()];
-    this.imageObjTwo = productsArray[this.getRandomIndex()];
-    this.imageObjThree = productsArray[this.getRandomIndex()];
+    this.imageObjOne = productArray[this.getRandomIndex()];
+    this.imageObjTwo = productArray[this.getRandomIndex()];
+    this.imageObjThree = productArray[this.getRandomIndex()];
     if(this.imageObjOne === this.imageObjTwo ||
        this.imageObjOne === this.imageObjThree ||
        this.imageObjTwo === this.imageObjThree
@@ -64,6 +67,8 @@ var tracker = {
 
   },
 
+// disables image click at 15 clicks
+
   limitClicks: function() {
     console.log(this.clicks);
     if(this.clicks >= 15) {
@@ -78,6 +83,7 @@ var tracker = {
 
   clicker: function(e) {
     tracker.limitClicks();
+
     if (
       e.target.id === tracker.imageObjOne.name ||
       e.target.id ===  tracker.imageObjTwo.name ||
@@ -89,33 +95,100 @@ var tracker = {
     }
 
   },
-
+// translate a clicked image into product object that gets one vote incremented
   tallyVotes: function(elId) {
     for(var i = 0; i < productNames.length; i++) {
-      if(elId === productsArray[i].name) {
-        productsArray[i].votes +=1;
-        console.log(productsArray[i]);
+      if(elId === productArray[i].name) {
+        productArray[i].votes +=1;
+        console.log(productArray[i]);
         break;
       }
     }
   },
+//  collecting total votes on each picture and pushing to votesByProduct
+  renderChart: function() {
+    var votesByProduct = [];
+    for (var i = 0; i < productArray.length; i++) {
+
+      votesByProduct.push(productArray[i].votes);
+    }
+
+
+
+    var chart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Votes',
+        data: votesByProduct,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+        ],
+        borderWidth: 1
+      }]
+    }
+  })
+},
+
 
   renderResults: function() {
     // create an UL
     // create each of the LIs and add content
     // append each LI to the UL
     // append the Ul to the document
+
     var ulEl = document.createElement('ul');
 
-    for(var i = 0; i < productsArray.length; i++) {
+    for(var i = 0; i < productArray.length; i++) {
       var liEl = document.createElement('li');
-      liEl.textContent = productsArray[i].name + ': ' + productsArray[i].votes;
+      liEl.textContent = productArray[i].name + ': ' + productArray[i].votes;
       ulEl.appendChild(liEl);
+      tracker.renderChart();
     }
-
     this.resultsEl.appendChild(ulEl);
-  }
+  },
 };
-
 tracker.imageContainerEl.addEventListener('click', tracker.clicker);
 tracker.displayImages();
