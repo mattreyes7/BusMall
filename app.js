@@ -82,6 +82,15 @@ var tracker = {
 
   },
 
+  updateChartArray: function() {
+    for (var i = 0; i < productArray.length; i++) {
+      productNames[i] = productArray[i].name;
+      this.votes[i] = productArray[i].votes;
+    }
+    updateChartArray();
+
+  },
+
 
   clicker: function(e) {
     tracker.limitClicks();
@@ -97,7 +106,7 @@ var tracker = {
     }
 
   },
-
+// translate a clicked image into product object that gets one vote incremented
   tallyVotes: function(elId) {
     for(var i = 0; i < productNames.length; i++) {
       if(elId === productArray[i].name) {
@@ -107,27 +116,15 @@ var tracker = {
       }
     }
   },
-
-  updateChartArray: function() {
+//  collecting total votes on each picture and pushing to votesByProduct
+  renderChart: function() {
+    var votesByProduct = [];
     for (var i = 0; i < productArray.length; i++) {
-      productNames[i] = productArray[i].name;
-      this.votes[i] = productArray[i].votes;
+
+      votesByProduct.push(productArray[i].votes);
     }
-    // updateChartArray();
-
-  },
 
 
-  renderEmptyChart: function() {
-    var votes = function(elId) {
-      for(var i = 0; i < productNames.length; i++) {
-        if(elId === productArray[i].name) {
-          productArray[i].votes +=1;
-          // console.log(productArray[i]);
-          // break;
-        }
-      }
-    };
 
     var chart = new Chart(ctx, {
     type: 'horizontalBar',
@@ -135,7 +132,7 @@ var tracker = {
       labels: productNames,
       datasets: [{
         label: '# of Votes',
-        data: votes,
+        data: votesByProduct,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -171,8 +168,7 @@ var tracker = {
       var liEl = document.createElement('li');
       liEl.textContent = productArray[i].name + ': ' + productArray[i].votes;
       ulEl.appendChild(liEl);
-      tracker.renderEmptyChart();
-      tracker.updateChartArray();
+      tracker.renderChart();
 
     }
 
