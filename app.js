@@ -3,13 +3,29 @@ var productNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegu
 var productArray = [];
 var ctx = document.getElementById('chart').getContext('2d');
 
-function Product(name) {
+function Product(name,path,votes) {
   this.name = name;
   this.path = './assets/' + name + '.jpg';
   this.votes = 0;
   productArray.push(this)
 
 }
+
+function createLs() {
+  localStorage.setItem('productArray', JSON.stringify(productArray));
+  console.log('createLs');
+}
+
+
+  function retrieveLs(){
+  var parsedData = JSON.parse(localStorage.getItem('productArray'));
+  console.log('retrieveLs');
+  for (var i = 0; i < parsedData.length; i++) {
+    var currentProduct = parsedData[i];
+    new Product(Product.name, Product.path, Product.votes);
+  }
+}
+
 // builds products with IFFE
 (function() {
   for(var i = 0; i < productNames.length; i++) {
@@ -17,7 +33,6 @@ function Product(name) {
   }
 })();
 
-// var chart = document.getElementById('render-chart');
 
 var tracker = {
   imageOneEl: document.getElementById('imageOne'),
@@ -82,16 +97,6 @@ var tracker = {
 
   },
 
-  updateChartArray: function() {
-    for (var i = 0; i < productArray.length; i++) {
-      productNames[i] = productArray[i].name;
-      this.votes[i] = productArray[i].votes;
-    }
-    updateChartArray();
-
-  },
-
-
   clicker: function(e) {
     tracker.limitClicks();
 
@@ -139,15 +144,43 @@ var tracker = {
           'rgba(255, 206, 86, 0.2)',
           'rgba(75, 192, 192, 0.2)',
           'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
         ],
         borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
         ],
         borderWidth: 1
       }]
@@ -169,23 +202,9 @@ var tracker = {
       liEl.textContent = productArray[i].name + ': ' + productArray[i].votes;
       ulEl.appendChild(liEl);
       tracker.renderChart();
-
     }
-
     this.resultsEl.appendChild(ulEl);
   },
-
-  // build chart
-  // var ctx = document.getElementById('chart').getContext('2d');
-
-
 };
-
 tracker.imageContainerEl.addEventListener('click', tracker.clicker);
 tracker.displayImages();
-
-
-
-// chart.addEventListener('click', function(){
-//   drawChart();
-// });
