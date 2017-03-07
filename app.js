@@ -42,14 +42,22 @@ var tracker = {
     this.imageObjOne = productArray[this.getRandomIndex()];
     this.imageObjTwo = productArray[this.getRandomIndex()];
     this.imageObjThree = productArray[this.getRandomIndex()];
+
     if(this.imageObjOne === this.imageObjTwo ||
        this.imageObjOne === this.imageObjThree ||
        this.imageObjTwo === this.imageObjThree
      ) {
       this.displayImages();
+      
+      localStorage.setItem('productArray', JSON.stringify(productArray));
+      console.log(productArray);
+      localStorage.getItem('productArray', JSON.parse(productArray));
+
     }
 
+
   },
+
 
   // use random indices in function that displays 3 random non repeating images
 
@@ -66,6 +74,7 @@ var tracker = {
     this.imageThreeEl.id = this.imageObjThree.name;
 
   },
+
 
 // disables image click at 15 clicks
 
@@ -107,6 +116,7 @@ var tracker = {
   },
 //  collecting total votes on each picture and pushing to votesByProduct
   renderChart: function() {
+
     var votesByProduct = [];
     for (var i = 0; i < productArray.length; i++) {
 
@@ -170,6 +180,9 @@ var tracker = {
       }]
     }
   })
+  // localStorage.setItem('productArray', JSON.stringify(productArray));
+  // console.log(productArray);
+  // localStorage.getItem('productArray', JSON.parse(productArray));
 },
 
 
@@ -190,5 +203,6 @@ var tracker = {
     this.resultsEl.appendChild(ulEl);
   },
 };
+
 tracker.imageContainerEl.addEventListener('click', tracker.clicker);
 tracker.displayImages();
